@@ -15,10 +15,13 @@ const employee_crud_controller = {
     try {
       const {page, size} = paginateDefine(req);
       
-      const data = await Employee.findAndCountAll({
+      let data = await Employee.findAndCountAll({
         limit: size,
         offset: size * (page - 1), 
       })
+
+      data.rows.map( item => { item.password = undefined })
+
       return res.json(data);
     } catch (error) {
       console.log(error);
