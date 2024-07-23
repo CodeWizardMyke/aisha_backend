@@ -32,6 +32,7 @@ const employee_crud_controller = {
     try {
       const {employee_id} = req.headers;
       const data = await Employee.findByPk(employee_id);
+      data.password = undefined
       await data.update(req.body);
       return res.json(data);
     } catch (error) {
