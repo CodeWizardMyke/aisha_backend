@@ -32,6 +32,7 @@ module.exports = {
         type:Sequelize.STRING,
         allowNull:false
       },
+      cart_code:Sequelize.STRING,
       state:Sequelize.STRING,
       createdAt:Sequelize.DATE,
       updatedAt:Sequelize.DATE,

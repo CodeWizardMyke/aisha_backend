@@ -28,6 +28,7 @@ module.exports =  (sequelize, Datetypes) => {
       type:Datetypes.STRING,
       allowNull:false
     },
+    cart_code:Datetypes.STRING,
     state:Datetypes.STRING,
     createdAt:Datetypes.DATE,
     updatedAt:Datetypes.DATE,
