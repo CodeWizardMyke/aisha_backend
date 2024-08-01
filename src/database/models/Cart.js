@@ -1,35 +1,23 @@
 
 module.exports =  (sequelize, Datetypes) => {
   const Cart = sequelize.define('Cart',{
-    Cart_id:{
+    cart_id:{
       type:Datetypes.INTEGER,
       autoIncrement:true,
       primaryKey:true,
       allowNull:false,
       unique:true
     },
-    user_name:{
-      type:Datetypes.STRING,
+    qtd_products:{
+      type:Datetypes.INTEGER,
       allowNull:false
-    },
-    product_id:{
-      type: Datetypes.INTEGER,
-      allowNull:false
-    },
-    qtd_product:{
-      type:Datetypes.STRING,
-      allowNull:false,
     },
     amount:{
-      type:Datetypes.DECIMAL,
+      type: Datetypes.DECIMAL,
       allowNull:false
     },
-    cpf:{
-      type:Datetypes.STRING,
-      allowNull:false
-    },
-    cart_code:Datetypes.STRING,
     state:Datetypes.STRING,
+    fk_client_cart:Datetypes.INTEGER,
     createdAt:Datetypes.DATE,
     updatedAt:Datetypes.DATE,
   },{
@@ -38,9 +26,9 @@ module.exports =  (sequelize, Datetypes) => {
   });
 
   Cart.associate = (models) => {
-    Cart.belongsTo(models.Product, {
-      foreignKey: 'product_id',
-      as: 'product'
+    Cart.belongsTo(models.Client, {
+      foreignKey: 'fk_client',
+      as: 'client'
     });
   }
 

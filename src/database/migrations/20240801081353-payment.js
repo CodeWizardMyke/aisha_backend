@@ -1,6 +1,5 @@
 'use strict';
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('payment', {
@@ -11,11 +10,14 @@ module.exports = {
         allowNull:false,
         unique:true
       },
-      client_cpf:{
-        type:Sequelize.STRING,
-        allowNull:false,
+      fk_client_id:{
+        type:Sequelize.INTEGER,
+        references:{
+          model:'client',
+          key:'client_id'
+        }
       },
-      cart_id:{
+      fk_cart_id:{
         type: Sequelize.INTEGER,
         references: {
           model: 'cart',
@@ -27,7 +29,7 @@ module.exports = {
         allowNull:false,
       },
       payment_status:{
-        type:Sequelize.INTEGER,
+        type:Sequelize.STRING,
         allowNull:false,
       },  
       createdAt:Sequelize.DATE,

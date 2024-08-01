@@ -4,8 +4,7 @@ const paginateDefine = require('../functions/paginateDefine');
 const Cart_crud_controller = {
   createCart: async (req, res) => {
     try {
-      const data = await Cart.create(req.body)
-      return res.json(data);
+      console.log(req.body)
     } catch (error) {
       console.log(error);
       return res.status(401).json(error)  

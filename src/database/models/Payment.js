@@ -8,11 +8,11 @@ module.exports =  (sequelize, Datetypes) => {
       allowNull:false,
       unique:true
     },
-    client_cpf:{
+    fk_client_id:{
       type:Datetypes.STRING,
       allowNull:false,
     },
-    cart_id:{
+    fk_cart_id:{
       type: Datetypes.INTEGER,
       allowNull:false,
     },
@@ -34,9 +34,14 @@ module.exports =  (sequelize, Datetypes) => {
 
   Payment.associate = (models) => {
     Payment.belongsTo(models.Cart, {
-      foreignKey: 'cart_id',
+      foreignKey: 'fk_cart_id',
       as: 'cart',
     });
+
+    Payment.belongsTo(models.Client,{
+      foreignKey:'fk_client_id',
+      as:'client'
+    })
   }
 
   return Payment;  

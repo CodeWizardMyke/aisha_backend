@@ -1,7 +1,5 @@
 'use strict';
 
-const { name } = require("ejs");
-
 module.exports = {
   async up (queryInterface,Sequelize) {
     queryInterface.createTable('employee',{
