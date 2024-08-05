@@ -10,7 +10,11 @@ module.exports = {
         type:Sequelize.INTEGER
       },
       clientName:Sequelize.STRING,
-      clientInstagram:Sequelize.STRING,
+      clientInstagram:{
+        type:Sequelize.STRING,
+        unique:true,
+        allowNull:false
+      },
     })
   },
 

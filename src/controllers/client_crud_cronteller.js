@@ -1,5 +1,7 @@
 const {Client} = require('../database/models');
 
+const paginateDefine = require('../functions/paginateDefine');
+
 const client_crud = {
     create: async (req, res ) => {
         try {
@@ -13,9 +15,13 @@ const client_crud = {
     },
     read: async (req, res ) => {
         try {
-            const {clientInstagram} = req.body;
+            const {size, page} = paginateDefine(req)
+            
+            const data = await Client.findAndCountAll({
+                limit:size,
+                offset: size * (page -1)
+            });
 
-            const data = await Client.findOne({where:{clientInstagram:clientInstagram}});
             return res.status(200).json(data);
 
         } catch (error) {
@@ -40,7 +46,8 @@ const client_crud = {
     },
     delete: async (req, res ) => {
         try {
-            const {client_id} = req.body;
+            const {client_id} = req.headers;
+            console.log(client_id)
 
             const data = await Client.findOne({where:{client_id:client_id}});
             await data.destroy() ;
