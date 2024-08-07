@@ -1,10 +1,30 @@
-const {Cart} = require('../database/models');
+const {Cart, Cart_item, Product} = require('../database/models');
 const paginateDefine = require('../functions/paginateDefine');
 
 const Cart_crud_controller = {
   create: async (req, res) => {
     try {
-      console.log(req.body)
+      const createCart = {
+        amout:0,
+        qtd_product:0,
+        state:'pendding',
+        fk_client: req.body.client_id
+      }
+
+      const {items} = req.body;
+
+
+      for( const item of items ){
+        const product = await Product.findByPk(item.product_id);
+        qtd_products += item.qtd_product ;
+        amout += Number(product.price) * item.qtd_product;
+      }
+
+
+      await Cart.create()
+
+      
+
     } catch (error) {
       console.log(error);
       return res.status(401).json(error)  

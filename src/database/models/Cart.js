@@ -17,7 +17,7 @@ module.exports =  (sequelize, Datetypes) => {
       allowNull:false
     },
     state:Datetypes.STRING,
-    fk_client_cart:Datetypes.INTEGER,
+    fk_client:Datetypes.INTEGER,
     createdAt:Datetypes.DATE,
     updatedAt:Datetypes.DATE,
   },{
