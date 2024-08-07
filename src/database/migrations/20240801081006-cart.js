@@ -19,7 +19,7 @@ module.exports = {
         allowNull:false
       },
       state:Sequelize.STRING,
-      fk_client:{
+      fk_client_id:{
         type:Sequelize.INTEGER,
         references:{
           model:'client',

@@ -4,26 +4,32 @@ const paginateDefine = require('../functions/paginateDefine');
 const Cart_crud_controller = {
   create: async (req, res) => {
     try {
-      const createCart = {
-        amout:0,
-        qtd_product:0,
+      const objectCart = {
+        amount:0,
+        qtd_products:0,
         state:'pendding',
-        fk_client: req.body.client_id
+        fk_client_id: req.body.client_id
       }
 
       const {items} = req.body;
 
-
       for( const item of items ){
         const product = await Product.findByPk(item.product_id);
-        qtd_products += item.qtd_product ;
-        amout += Number(product.price) * item.qtd_product;
+        objectCart.qtd_products += item.qtd_products ;
+        objectCart.amount += Number(product.price) * item.qtd_products;
       }
 
+      const dataCartCreated = await Cart.create(objectCart)
 
-      await Cart.create()
+      for( const item of items){
+        await Cart_item.create({
+          fk_cart_id:    dataCartCreated.cart_id,
+          fk_product_id: item.product_id,
+          qtd_products:  item.qtd_products
+        })
+      }
 
-      
+      return res.status(201).json('Criado com sucesso!')
 
     } catch (error) {
       console.log(error);
@@ -33,13 +39,14 @@ const Cart_crud_controller = {
   read:  async (req, res) => {
     try {
       const {page, size} = paginateDefine(req);
-      const {cpf, state} = req.headers;
+      const {client_id} = req.headers;
       
       const data = await Cart.findAndCountAll({
-        where:{ cpf: cpf, state: state },
+        where:{fk_client_id:client_id},
         limit: size,
-        offset: size * (page - 1), 
+        offset: size * (page - 1),
       })
+
       return res.json(data);
     } catch (error) {
       console.log(error);
@@ -64,7 +71,7 @@ const Cart_crud_controller = {
       const data = await Cart.findOne({
         where:{
           cart_id: cart_id,
-          state: 'approved'
+          state: 'pendding'
         }
       });
       

@@ -6,9 +6,18 @@ module.exports = (Sequelize,DateTypes) => {
             primaryKey:true,
             autoIncrement:true
         },
-        fk_cart_id:DateTypes.INTEGER,
-        fk_product_id:DateTypes.INTEGER,
-        qtd_products:DateTypes.INTEGER
+        fk_cart_id:{
+            type:DateTypes.INTEGER,
+            allowNull:false
+        },
+        fk_product_id:{
+            type:DateTypes.INTEGER,
+            allowNull:false
+        },
+        qtd_products:{
+            type:DateTypes.INTEGER,
+            allowNull:false
+        }
     },
     {
         tableName:'cart_item',

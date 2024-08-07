@@ -17,7 +17,7 @@ module.exports =  (sequelize, Datetypes) => {
       allowNull:false
     },
     state:Datetypes.STRING,
-    fk_client:Datetypes.INTEGER,
+    fk_client_id:Datetypes.INTEGER,
     createdAt:Datetypes.DATE,
     updatedAt:Datetypes.DATE,
   },{
@@ -27,7 +27,7 @@ module.exports =  (sequelize, Datetypes) => {
 
   Cart.associate = (models) => {
     Cart.belongsTo(models.Client, {
-      foreignKey: 'fk_client',
+      foreignKey: 'fk_client_id',
       as: 'client'
     });
   }
