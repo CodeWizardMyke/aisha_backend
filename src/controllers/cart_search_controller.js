@@ -1,8 +1,8 @@
 const {Cart} = require('../database/models');
+
 const paginateDefine = require('../functions/paginateDefine');
 
 const cart_search_controller = {
-
   get_cart_client:  async (req, res) => {
     try {
       const {page, size} = paginateDefine(req);
@@ -15,7 +15,7 @@ const cart_search_controller = {
       const data = await Cart.findAndCountAll({
         where:{
           fk_client_id:client_id,
-          state: state ? state : 'pendding' 
+          state: state ? state : 'pendding'
         },
         limit: size,
         offset: size * (page - 1),
