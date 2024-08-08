@@ -41,14 +41,13 @@ const cart_items_crud_controller = {
         limit: size,
         offset: size * ( page -1 )
       })
-
       
     } catch (error) {
       console.log(error);
       return res.status(501).json(error)
     }
   },
-  upate: async (req,res) => {
+  update: async (req,res) => {
     try {
       const {cart_item_id} = req.headers;
 
