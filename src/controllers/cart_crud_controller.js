@@ -17,9 +17,7 @@ const Cart_crud_controller = {
 
       //scrolling through all items in the cart
       for( const item of items ){
-        //search for the product in the cart and update the stock by separating the items that will be sold
         const product = await Product.findByPk(item.product_id);
-        await product.update({stock: product.stock - item.qtd_products});
 
         //update objectCart structure data
         objectCart.qtd_products += item.qtd_products ;
@@ -103,18 +101,6 @@ const Cart_crud_controller = {
 
       //We iterate over all items found
       for(const item of cartItemData){
-        //bring the product with the ID corresponding to the one in the cart
-        const product =  await Product.findOne({
-          where:{
-            product_id: item.fk_product_id
-          }
-        })
-
-        //update the product by adding back the separated items
-        await product.update({
-          stock: product.stock + item.qtd_products,
-        })
-        //finally delete the item from the cart
         await item.destroy();
       }
       //delete own cart

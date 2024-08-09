@@ -41,6 +41,8 @@ const cart_items_crud_controller = {
         limit: size,
         offset: size * ( page -1 )
       })
+
+      return res.status(200).json(data)
       
     } catch (error) {
       console.log(error);
