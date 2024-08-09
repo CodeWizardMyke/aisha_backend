@@ -35,7 +35,7 @@ const Cart_crud_controller = {
         })
       }
 
-      return res.status(201).json('Criado com sucesso!')
+      return res.status(201).json({successful:{msg:"o carrinho foi criado com sucesso!"}})
 
     } catch (error) {
       console.log(error);
@@ -106,7 +106,7 @@ const Cart_crud_controller = {
       //delete own cart
       await cartData.destroy();
 
-      return res.json(`successfully deleted`);
+      return res.json({successful:{msg:"o carrinho foi criado com sucesso!"}});
     } catch (error) {
       console.log(error);
       return res.status(401).json(error)  

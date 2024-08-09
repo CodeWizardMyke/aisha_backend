@@ -21,7 +21,7 @@ const cart_items_crud_controller = {
         )
       }
 
-      return res.status(201).json({Sucessful:{msg:'items adicionado com sucesso no carrinho!'}})
+      return res.status(201).json({successful:{msg:'items adicionado com sucesso no carrinho!'}})
     } catch (error) {
       console.log(error)
       return res.status(501).json(error)
@@ -66,7 +66,7 @@ const cart_items_crud_controller = {
       }
 
       await data.update(req.body);
-      return res.status(201).json({Sucessful:{msg:'Item atualizado com sucesso!'}})
+      return res.status(201).json({successful:{msg:'Item atualizado com sucesso!'}})
       
     } catch (error) {
       console.log(error);
@@ -91,7 +91,7 @@ const cart_items_crud_controller = {
 
       await data.destroy();
 
-      return res.status(200).json({Sucessful:{msg:"Item do carrinho deletado com sucesso!"}})
+      return res.status(200).json({successful:{msg:"Item do carrinho deletado com sucesso!"}})
       
     } catch (error) {
       console.log(error);
