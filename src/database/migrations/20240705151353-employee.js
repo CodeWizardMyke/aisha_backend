@@ -14,7 +14,7 @@ module.exports = {
         type:Sequelize.STRING,
         allowNull:false,
       },
-      employye_office:Sequelize.STRING,
+      role:Sequelize.STRING,
       email:{
         type:Sequelize.STRING,
         allowNull:false,

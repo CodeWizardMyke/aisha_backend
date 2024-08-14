@@ -12,7 +12,7 @@ module.exports =  (sequelize, Datetypes) => {
       type:Datetypes.STRING,
       allowNull:false
     },
-    employee_role:Datetypes.STRING,
+    role:Datetypes.STRING,
     email:{
       type:Datetypes.STRING,
       allowNull:false,

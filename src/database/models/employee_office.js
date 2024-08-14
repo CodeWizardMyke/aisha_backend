@@ -2,7 +2,7 @@
 module.exports = (Sequelize, DateTypes) => {
 
     const Employee_office = Sequelize.define('Employee_office',{
-        employee_office_id:{
+        role_id:{
             type:DateTypes.INTEGER,
             primaryKey:true,
             autoIncrement:true

@@ -5,7 +5,7 @@ module.exports = {
   async up (queryInterface, Sequelize) {
 
     await queryInterface.createTable('employee_office',{
-      employee_office_id:{
+      role_id:{
         type:Sequelize.INTEGER,
         autoIncrement:true,
         primaryKey:true,
