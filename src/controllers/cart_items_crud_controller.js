@@ -39,7 +39,8 @@ const cart_items_crud_controller = {
       const data = await Cart_item.findAndCountAll({
         where:{fk_cart_id:cart_id},
         limit: size,
-        offset: size * ( page -1 )
+        offset: size * ( page -1 ),
+        include: 'product'
       })
 
       return res.status(200).json(data)
