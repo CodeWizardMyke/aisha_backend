@@ -1,5 +1,7 @@
+const { parse } = require('dotenv');
 const {Cart, Cart_item, Product} = require('../database/models');
 const paginateDefine = require('../functions/paginateDefine');
+const bcrpty = require('bcrypt');
 
 const Cart_crud_controller = {
   create: async (req, res) => {
@@ -35,7 +37,8 @@ const Cart_crud_controller = {
         })
       }
 
-      return res.status(201).json({successful:{msg:"o carrinho foi criado com sucesso!"}})
+      const url = '/cart/client/' + req.body.client_id ;
+      return res.status(201).json({cartLink:url})
 
     } catch (error) {
       console.log(error);

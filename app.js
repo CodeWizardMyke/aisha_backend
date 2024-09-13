@@ -26,7 +26,9 @@ const cart_search_router = require('./src/routes/cart_search_router');
 const cart_crud_router = require('./src/routes/cart_crud_router');
 const cart_item_crud_router = require('./src/routes/cart_item_crud_router');
 const client_search_router = require('./src/routes/client_search_router');
+const client_cart_router = require('./src/routes/client_cart_router');
 
+app.use('/cart', client_cart_router);
 app.use('/api/auth', employee_auth_router);
 app.use('/api/product/search', product_search_router);
 app.use('/api/product/crud', product_crud_router);
