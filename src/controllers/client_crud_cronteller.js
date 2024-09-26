@@ -31,7 +31,8 @@ const client_crud = {
     },
     update: async (req, res ) => {
         try {
-            const {client_id}  = req.body;
+            const {client_id}  = req.headers
+            console.log('client_id', client_id)
 
             const data = await Client.findOne({where:{client_id:client_id}});
             delete req.body.client_id;
