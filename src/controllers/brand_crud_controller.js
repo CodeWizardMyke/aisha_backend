@@ -149,7 +149,10 @@ const brand_crud_controller =  {
 
         try {
 
-            const { id } = req.headers;
+            const id = req.body.brand_id;
+
+            console.log('id:', id);
+            console.log('Body:', req.body);
 
             const { employee_id } = req.token_decoded;
 
@@ -255,7 +258,7 @@ const brand_crud_controller =  {
                 return res.status(403).json({
                     errors:[{
                         path:'brand',
-                        msg:'Marcas padrão não podem ser deletadas.'
+                        msg:'Esta marca é padrão do sistema e não pode ser excluída.'
                     }]
                 });
 

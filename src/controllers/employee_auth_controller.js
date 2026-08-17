@@ -13,8 +13,10 @@ const employee_auth_controller = {
 
       const userAuth = {
         token: token,
-        user: userAuthPass
+        user: userAuthPass,
+        authTimer: new Date(),
       };
+
       return res.json(userAuth);
 
     } catch (error) {
@@ -24,8 +26,17 @@ const employee_auth_controller = {
   },
   create: async (req, res) =>{
     try {
-      const data = await Employee.create(req.body)
-      return res.json(data);
+      const data = await Employee.create(req.body);
+
+      const token = jwt.sign({ employee_id:data.employee_id }, process.env.JWT_TOKEN, /*{expiresIn:'0h'}*/ );;
+      
+      const userAuth = {
+        token: token,
+        user: data,
+        authTimer: new Date(),
+      };
+
+      return res.json(userAuth);
     } catch (error) {
       console.log(error);
       return res.status(500).json(error)  

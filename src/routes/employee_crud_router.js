@@ -10,7 +10,7 @@ const jsonwebtoken = require('../middlewares/jsonwebtoken');
 
 router.post('/create', ec_sweep_fields, ec_check_fields, employee_crud_controller.createEmployee);
 router.get('/read', jsonwebtoken, employee_crud_controller.readEmployee);
-router.put('/update', jsonwebtoken, update_check_fields, eu_pass_update, employee_crud_controller.updateEmployee);
+router.put('/update', jsonwebtoken, eu_pass_update, employee_crud_controller.updateEmployee);
 router.delete('/destroy', jsonwebtoken, employee_crud_controller.deleteEmployee);
 
 module.exports = router;

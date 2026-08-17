@@ -244,7 +244,7 @@ const category_controller = {
                 return res.status(403).json({
                     errors: [{
                         path: 'category',
-                        msg: 'Categorias padrão não podem ser deletadas.'
+                        msg: 'Esta categoria é padrão do sistema e não pode ser excluída.'
                     }]
                 });
             }
