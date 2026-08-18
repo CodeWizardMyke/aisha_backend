@@ -1,25 +1,33 @@
-
-const {validationResult} = require('express-validator');
+const { validationResult } = require('express-validator');
 const removeFiles = require('../functions/removeUploadedFiles');
 
-const pc_check_fields = async ( req, res, next ) => {
+const pc_check_fields = async (req, res, next) => {
+
     const checkResult = validationResult(req);
-    let errors  = null;
 
-    if(!checkResult.isEmpty()){
-        errors = checkResult
+    if (!checkResult.isEmpty()) {
+        removeFiles(req.files);
+
+        return res.status(400).json(checkResult);
     }
 
-    if(errors){
-        removeFiles(req.files)
-        return res.status(400).json(errors);
+    function normalizePricing(value) {
+
+        if (value === undefined || value === null || value === '') {
+            return 0;
+        }
+
+        const number = Number(value);
+
+        return Number.isFinite(number) ? number : 0;
     }
-    
-    req.body.product_state = 'Enable'
-    req.body.discounts = Number(req.body.discounts)
-    req.body.profit_margin = Number(req.body.profit_margin)
-    req.body.fees_and_taxes = Number(req.body.fees_and_taxes)
-    
+
+    req.body.product_state = 'Enable';
+
+    req.body.discounts = normalizePricing(req.body.discounts);
+    req.body.profit_margin = normalizePricing(req.body.profit_margin);
+    req.body.fees_and_taxes = normalizePricing(req.body.fees_and_taxes);
+
     return next();
 };
 
