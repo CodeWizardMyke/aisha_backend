@@ -7,6 +7,8 @@ const jwt = require('jsonwebtoken');
 const employee_crud_controller = {
   createEmployee: async (req, res) => {
     try {
+
+      req.body.role = 'aux'
       const user = await Employee.create(req.body)
 
       const token = jwt.sign({ employee_id:user.employee_id }, process.env.JWT_TOKEN, /*{expiresIn:'0h'}*/ );;
