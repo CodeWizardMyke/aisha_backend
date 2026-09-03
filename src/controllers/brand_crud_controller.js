@@ -151,9 +151,6 @@ const brand_crud_controller =  {
 
             const id = req.body.brand_id;
 
-            console.log('id:', id);
-            console.log('Body:', req.body);
-
             const { employee_id } = req.token_decoded;
 
             if(!id){

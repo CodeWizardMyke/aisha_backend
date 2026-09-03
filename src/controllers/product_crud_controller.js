@@ -93,35 +93,29 @@ const product_crud_controller = {
 
             const { employee_id } = req.token_decoded;
             
-
-            const count = await Product.count({
-                where:{
-                    owner_employee_id: employee_id
-                }
+            /*
+                Limite demo
+            */
+           
+            const limitReached = await validateDemoLimit({
+                model: Brand,
+                employee_id
             });
 
+            if(limitReached){
 
-            if(employee_id !== 1 && count >= 200){
-
-                return res.status(401).json({
-                    errors:[
-                        {
-                            path:"demo",
-                            msg:"Valor máximo excedido na versão demo do projeto."
-                        }
-                    ]
+                return res.status(403).json({
+                    errors:[{
+                        path:'demo',
+                        msg:'Limite de marcas atingido na versão demo.'
+                    }]
                 });
 
             }
 
-
-            if(employee_id !== 1){
-                req.body.owner_employee_id = employee_id;
-            }
-
+            req.body.owner_employee_id = employee_id;
 
             const product = await Product.create(req.body);
-
 
             await saveImages(
                 product.product_id,
@@ -187,7 +181,7 @@ const product_crud_controller = {
                         owner_employee_id:null
                     },
                     {
-                        owner_employee_id:employee_id
+                        owner_employee_id:req.token_decoded
                     }
                 ]
 
@@ -272,19 +266,11 @@ const product_crud_controller = {
             } = req.token_decoded;
 
 
-
-            const owner =
-                employee_id === 1
-                ? null
-                : employee_id;
-
-
-
             const product = await Product.findOne({
 
                 where:{
                     product_id,
-                    owner_employee_id:owner
+                    owner_employee_id:employee_id
                 }
 
             });
@@ -296,8 +282,6 @@ const product_crud_controller = {
                 });
 
             }
-
-
 
             await removeImages(
                 product_id,

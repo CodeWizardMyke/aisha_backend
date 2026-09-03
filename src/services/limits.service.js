@@ -1,12 +1,8 @@
 async function validateDemoLimit({
     model,
     employee_id,
-    limit = 200
+    limit = 10
 }) {
-
-    if(employee_id === 1){
-        return false;
-    }
 
     const total = await model.count({
         where:{
