@@ -10,6 +10,7 @@ const {
 
 const paginateDefine = require('../functions/paginateDefine');
 const remove_image = require('../functions/remove_image');
+const { validateDemoLimit } = require('../services/limits.service');
 
 
 const saveImages = async (product_id, files = [], type) => {
@@ -84,8 +85,8 @@ const removeImages = async (product_id, ids = []) => {
     });
 
 };
-const product_crud_controller = {
 
+const product_crud_controller = {
 
     create: async (req,res)=>{
 
